@@ -19,7 +19,7 @@ class Door:
             'second',
             'first',
             'first',
-            'second',
+            'first',
             'first',
             'third',
             'sixth']

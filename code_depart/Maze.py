@@ -147,8 +147,8 @@ class Maze:
         # print([wall_list, obstacle_list, item_list, monster_list])
         return [wall_list, obstacle_list, item_list, monster_list, door_list]
 
-    def look_at_door(self, player_current):
-        visible_doors = self.make_perception_list(player_current)[4]
+    def look_at_door(self, player_current, display_surf):
+        visible_doors = self.make_perception_list(player_current, display_surf)[4]
         door_state = []
         for door in visible_doors:
             door_state.append(door.check_door())

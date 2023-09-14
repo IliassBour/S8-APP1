@@ -65,7 +65,7 @@ class App:
             # you need to win all four rounds to beat it
 
         if keys[K_SPACE]:
-            print(self.maze.look_at_door(self.player))
+            print(self.maze.look_at_door(self.player, self._display_surf))
             # returns the state of the doors you can currently see
             # you need to unlock it by providing the correct key
 
