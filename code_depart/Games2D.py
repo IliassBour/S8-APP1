@@ -1,9 +1,11 @@
 from pygame.locals import *
 import pygame
 
+import GenSim
 from Player import *
 from Maze import *
 from Constants import *
+from GenSim import *
 
 
 class App:
@@ -53,14 +55,19 @@ class App:
 
         # Utility functions for AI
         if keys[K_p]:
-            self.maze.make_perception_list(self.player, self._display_surf)
+            print(self.maze.make_perception_list(self.player, self._display_surf))
             # returns a list of 5 lists of pygame.rect inside the perception radius
             # the 4 lists are [wall_list, obstacle_list, item_list, monster_list, door_list]
             # item_list includes coins and treasure
 
         if keys[K_m]:
+            sim = GenSim(12,1500,8,25,0.05,0.8, self.maze.monsterList[0])
+            beststats = sim.simulation()
+            self.player.set_attributes(beststats)
             for monster in self.maze.monsterList:
-                print(monster.mock_fight(self.player))
+                a = monster.mock_fight(self.player)
+                print(a)
+
             # returns the number of rounds you win against the monster
             # you need to win all four rounds to beat it
 
