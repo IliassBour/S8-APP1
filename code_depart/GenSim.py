@@ -60,7 +60,8 @@ class GenSim:
         for i in range(self.popsize):
             tmpPlayer = Player()
             tmpPlayer.set_attributes(attributes[i])
-            fitness[i] = self.monster.mock_fight(tmpPlayer)[1]
+            values = self.monster.mock_fight(tmpPlayer)
+            fitness[i] = values[0]+values[1]
         return fitness
 
     def getattributes(self, cvalues):

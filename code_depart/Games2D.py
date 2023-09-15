@@ -63,7 +63,7 @@ class App:
             # item_list includes coins and treasure
 
         if keys[K_m]:
-            sim = GenSim(12,1500,8,25,0.05,0.8, self.maze.monsterList[0])
+            sim = GenSim(12,1200,8,30,0.03,0.8, self.maze.monsterList[0])
             beststats = sim.simulation()
             self.player.set_attributes(beststats)
             for monster in self.maze.monsterList:
@@ -210,14 +210,14 @@ class App:
                 if event.type == pygame.USEREVENT:
                     self.timer += 0.01
             pygame.event.pump()
-            #keys = pygame.key.get_pressed()
-            #self.on_keyboard_input(keys)
+            keys = pygame.key.get_pressed()
+            self.on_keyboard_input(keys)
 
             graph = A_star(self.player.get_position(), self.maze.exit)
             wall_up, wall_down, wall_left, wall_right = graph.possible_path(self.maze.make_perception_list(self.player, self._display_surf)[0], self.player.get_position())
             heuristic = graph.calculate_heuristic(self.player.get_position())
             instruction = graph.next_move(wall_up, wall_down, wall_left, wall_right, heuristic)
-            self.on_AI_input(instruction)
+            #self.on_AI_input(instruction)
 
             #print("perception")
             #print(self.player.get_position())
