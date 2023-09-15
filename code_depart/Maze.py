@@ -142,9 +142,9 @@ class Maze:
             door_list.append(self.doorList[i])
 
         # POUR DEBUG - tenir la touche "p" pour voir la zone de perception
-        # pygame.draw.rect(display_surf, GREEN, perception_rect)
-        # pygame.display.flip()
-        # print([wall_list, obstacle_list, item_list, monster_list])
+        pygame.draw.rect(display_surf, GREEN, perception_rect)
+        pygame.display.flip()
+        print([wall_list, obstacle_list, item_list, monster_list])
         return [wall_list, obstacle_list, item_list, monster_list, door_list]
 
     def look_at_door(self, player_current, display_surf):

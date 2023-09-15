@@ -201,9 +201,14 @@ class App:
                 if event.type == pygame.USEREVENT:
                     self.timer += 0.01
             pygame.event.pump()
-            keys = pygame.key.get_pressed()
-            self.on_keyboard_input(keys)
+            #keys = pygame.key.get_pressed()
+            #self.on_keyboard_input(keys)
             # self.on_AI_input(instruction)
+            graph = A_star(self.player.get_position(), self.maze.exit)
+            wall_up, wall_down, wall_left, wall_right = graph.possible_path(self.maze.make_perception_list(self.player, self._display_surf)[0], self.player.get_position())
+            heuristic = graph.calculate_heuristic(self.player.get_position())
+            instruction = graph.next_move(wall_up, wall_down, wall_left, wall_right, heuristic)
+            self.on_AI_input(instruction)
             if self.on_coin_collision():
                 self.score += 1
             if self.on_treasure_collision():
