@@ -6,6 +6,7 @@ from Player import *
 from Maze import *
 from Constants import *
 from GenSim import *
+from A_star import *
 
 
 class App:
@@ -52,6 +53,7 @@ class App:
 
         if keys[K_DOWN] or keys[K_s]:
             self.move_player_down()
+            print(self.player.get_position())
 
         # Utility functions for AI
         if keys[K_p]:
@@ -210,12 +212,17 @@ class App:
             pygame.event.pump()
             #keys = pygame.key.get_pressed()
             #self.on_keyboard_input(keys)
-            # self.on_AI_input(instruction)
+
             graph = A_star(self.player.get_position(), self.maze.exit)
             wall_up, wall_down, wall_left, wall_right = graph.possible_path(self.maze.make_perception_list(self.player, self._display_surf)[0], self.player.get_position())
             heuristic = graph.calculate_heuristic(self.player.get_position())
             instruction = graph.next_move(wall_up, wall_down, wall_left, wall_right, heuristic)
             self.on_AI_input(instruction)
+
+            #print("perception")
+            #print(self.player.get_position())
+            #print(self.maze.make_perception_list(self.player, self._display_surf)[0][1])
+
             if self.on_coin_collision():
                 self.score += 1
             if self.on_treasure_collision():
